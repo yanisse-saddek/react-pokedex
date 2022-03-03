@@ -55,7 +55,8 @@
   align-items: center;
   justify-content: center;
   border:1px solid black;
-  border-radius: 30px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
   text-align: center;
 }
 .pokemon a{
@@ -66,8 +67,16 @@
 .pokemon img{
   height:140px;
 }
+.pokemon button{
+  border:none;
+  padding:0.4rem;
+  width:100%;
+  outline:none;
+  border:1px solid black;
+  background-color: rgb(252, 45, 45);
+  color:white;
+}
 .searchbar{
-  background-color: orange;
   width:100%;
   display: flex;
   align-items: center;
@@ -77,15 +86,15 @@
 .searchbar input{
   margin-right:30px;
   border-radius: 30px;
-  border:none;
   height:30px;
   text-align: center;
 }
 .searchbar input:focus{
-  border:none;
   outline:none;
 }
-
+.pokedex{
+  width:80%;
+}
 @media only screen and (max-width:700px) {
   .pokemon-list{
     grid-template-columns: 1fr 1fr 1fr ;

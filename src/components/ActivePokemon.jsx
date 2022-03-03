@@ -5,15 +5,13 @@ export default class ActivePokemon extends React.Component{
     
 
     render(){
-        console.log(this.props.activePokemon)
-
         return(
-            <div class="pokemon-actif" id="top">
-                <div class="left">
+            <div className="pokemon-actif" id="top">
+                <div className="left">
                     <img src={this.props.activePokemon.sprites.front_default} alt="" />
                 </div>
-                <div class="right">
-                    <div class="pokeinfo">
+                <div className="right">
+                    <div className="pokeinfo">
                     <p>Name: {this.props.activePokemon.name}</p>
                     <p>Height: {this.props.activePokemon.height}</p>
                     <p>Weight: {this.props.activePokemon.weight}</p>
