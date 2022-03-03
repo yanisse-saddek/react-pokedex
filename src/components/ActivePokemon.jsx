@@ -8,7 +8,7 @@ export default class ActivePokemon extends React.Component{
         console.log(this.props.activePokemon)
 
         return(
-            <div class="pokemon-actif">
+            <div class="pokemon-actif" id="top">
                 <div class="left">
                     <img src={this.props.activePokemon.sprites.front_default} alt="" />
                 </div>
