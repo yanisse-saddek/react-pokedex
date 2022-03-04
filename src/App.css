@@ -73,9 +73,15 @@
   width:100%;
   outline:none;
   border:1px solid black;
-  background-color: rgb(252, 45, 45);
   color:white;
 }
+.add-pokemon{
+  background-color: rgb(61, 116, 61);
+}
+.remove-pokemon{
+  background-color: rgb(243, 38, 2);
+}
+
 .pokemon p{
   text-transform: capitalize;
 }

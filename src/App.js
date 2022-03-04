@@ -28,11 +28,11 @@ export default class App extends React.Component{
   componentDidMount = ()=>{
     var pokemonsListArray =[]
     var allPokemonData = []
-    axios("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20").then(resultat=>{   
+    axios("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=10").then(resultat=>{   
       resultat.data.results.map(pokemon=>{
         axios(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`).then(resultatPokemon=>{
           allPokemonData.push(resultatPokemon.data)
-          pokemonsListArray.push(<AllPokemon  addPokedex={this.addToPokedex}onClick={this.activePokemon} pokemon={resultatPokemon.data}/>)
+          pokemonsListArray.push(<AllPokemon  removePokedex={this.removePokedex} addPokedex={this.addToPokedex}onClick={this.activePokemon} pokemon={resultatPokemon.data}/>)
           setTimeout(() => {
             this.setState({
               pokemonsList:pokemonsListArray,
@@ -50,7 +50,7 @@ export default class App extends React.Component{
     var searchedPokemons = []
     this.state.PokemonData.map(pokemon=>{
       if(pokemon.name.startsWith(searchInput)){
-        searchedPokemons.push(<AllPokemon  onClick={this.activePokemon} pokemon={pokemon} />)
+        searchedPokemons.push(<AllPokemon  addPokedex={this.addToPokedex} onClick={this.activePokemon} pokemon={pokemon} />)
       }
     })
     if(searchedPokemons.length == 0){
@@ -61,18 +61,30 @@ export default class App extends React.Component{
       searchedPokemon: searchedPokemons
     })
   }
+  removePokedex=(pokemonget)=>{
+    var pokedexData = this.state.pokedex
+    pokedexData.map(pokemon=>{
+      if(pokemon==pokemonget){
+        var index = pokedexData.indexOf(pokemonget)
+        pokedexData.splice(index, 1)
+      }
+    })
+    this.setState({
+      pokedex:pokedexData,
+    })
+
+
+  }
+
   addToPokedex = (pokemon)=>{
     var pokedexData = this.state.pokedex
-
     if(pokedexData.includes(pokemon)){
-      console.log('ya deja')
     }else{
       pokedexData.push(pokemon)
     }
     this.setState({
       pokedex:pokedexData
     })
-
   }
 
   showPokedex = (val)=>{
@@ -88,15 +100,15 @@ export default class App extends React.Component{
         {this.state.actif=="liste"
             ?
           <div>
-          <div className='searchbar'>
-            <SearchBar func={this.searchPokemon}/>
-          </div>
               <h1>Liste des pokémons</h1>
               <button onClick={()=>{this.showPokedex("pokedex")}}>Voir mon pokedex</button>
-                <div className="pokemon-list">
+              <div className='searchbar'>
+                  <SearchBar func={this.searchPokemon}/>
+              </div>
+              <div className="pokemon-list">
                   {this.state.searchedPokemon}
                   {this.state.pokemonsList? this.state.pokemonsList: this.state.searchedPokemon}
-                </div>
+              </div>
             </div>
               :
             <div className='pokedex'>
@@ -104,7 +116,7 @@ export default class App extends React.Component{
                 <button onClick={()=>{this.showPokedex("liste")}}>Voir la liste des pokémons</button>
 
                 <div className="pokemon-list">
-                  {this.state.pokedex.map(pokemon=>{return <AllPokemon  onClick={this.activePokemon}  pokemon={pokemon}/>})}              
+                  {this.state.pokedex.map(pokemon=>{return <AllPokemon  removePokedex={this.removePokedex}  onClick={this.activePokemon}  pokemon={pokemon}/>})}              
                 </div>
               </div>
           }
