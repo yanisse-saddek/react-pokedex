@@ -23,6 +23,21 @@
   justify-content: center;
   color:white;
   width:100%;
+  position: relative;
+}
+.close{
+  position: absolute;
+  top:10px;
+  right:10px;
+  background-color: red;
+  border-radius: 30px;
+  height:60px;
+  width:60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: bold;
 }
 .left{
   width:50%;
@@ -102,7 +117,7 @@
   outline:none;
 }
 .pokedex{
-  width:80%;
+  width:90%;
 }
 @media only screen and (max-width:700px) {
   .pokemon-list{
